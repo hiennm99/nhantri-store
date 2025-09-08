@@ -1,16 +1,22 @@
+// src/App.tsx - Updated
 import React from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router';
+import { CartProvider } from './contexts/CartContext';
+import { ShoppingCart } from './components/cart/ShoppingCart';
 import { HomePage } from './pages/HomePage';
 import { ProductPage } from './pages/ProductPage';
 
 const App: React.FC = () => {
     return (
-        <Router>
-            <Routes>
-                <Route path="/" element={<HomePage />} />
-                <Route path="/products" element={<ProductPage />} />
-            </Routes>
-        </Router>
+        <CartProvider>
+            <Router>
+                <Routes>
+                    <Route path="/" element={<HomePage />} />
+                    <Route path="/products" element={<ProductPage />} />
+                </Routes>
+                <ShoppingCart />
+            </Router>
+        </CartProvider>
     );
 };
 

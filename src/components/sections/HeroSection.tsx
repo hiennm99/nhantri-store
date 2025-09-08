@@ -1,27 +1,39 @@
+// src/components/sections/HeroSection.tsx - Updated
 import React, { useState, useEffect } from 'react';
+import { useCart } from '../../contexts/CartContext';
 
 export const HeroSection: React.FC = () => {
     const [currentSlide, setCurrentSlide] = useState<number>(0);
+    const { setCartOpen } = useCart();
+
     const images = [
         {
             id: 1,
+            title: "Hạt điều rang muối truyền thống",
             bgColor: "from-amber-200 to-orange-200",
             cashewPattern: "grid-cols-4 gap-3",
+            description: "Hương vị đậm đà"
         },
         {
             id: 2,
+            title: "Hạt điều nướng mật ong",
             bgColor: "from-yellow-200 to-amber-300",
             cashewPattern: "grid-cols-3 gap-4",
+            description: "Ngọt ngào tự nhiên"
         },
         {
             id: 3,
+            title: "Hạt điều sấy khô cao cấp",
             bgColor: "from-orange-200 to-red-200",
             cashewPattern: "grid-cols-5 gap-2",
+            description: "Giòn tan hảo hạng"
         },
         {
             id: 4,
+            title: "Hạt điều vỏ lụa đặc biệt",
             bgColor: "from-amber-100 to-yellow-200",
             cashewPattern: "grid-cols-6 gap-1",
+            description: "Thượng hạng Việt Nam"
         }
     ];
 
@@ -29,7 +41,7 @@ export const HeroSection: React.FC = () => {
     useEffect(() => {
         const interval = setInterval(() => {
             setCurrentSlide((prev) => (prev + 1) % images.length);
-        }, 3500); // Chuyển slide mỗi 3.5 giây
+        }, 3500);
 
         return () => clearInterval(interval);
     }, [images.length]);
@@ -46,6 +58,14 @@ export const HeroSection: React.FC = () => {
         setCurrentSlide((prev) => (prev - 1 + images.length) % images.length);
     };
 
+    const handleShopNow = () => {
+        // Scroll to products section
+        const productsSection = document.getElementById('products');
+        if (productsSection) {
+            productsSection.scrollIntoView({ behavior: 'smooth' });
+        }
+    };
+
     return (
         <section id="home" className="relative py-20 px-4 sm:px-6 lg:px-8 overflow-hidden">
             <div className="absolute inset-0 bg-gradient-to-r from-amber-100/50 to-orange-100/50"></div>
@@ -60,9 +80,30 @@ export const HeroSection: React.FC = () => {
                             Hạt điều Việt Nam hảo hạng, được tuyển chọn kỹ lưỡng và rang xay hoàn hảo. Trải nghiệm hương vị đích thực của hạt điều hảo hạng nhất Việt Nam.
                         </p>
 
-                        <button className="bg-gradient-to-r from-amber-500 to-orange-500 hover:from-amber-600 hover:to-orange-600 text-white px-8 py-3 rounded-full font-semibold transition-all transform hover:scale-105 shadow-lg">
-                            Mua ngay
-                        </button>
+                        {/* Hiển thị thông tin slide hiện tại */}
+                        <div className="bg-white/80 backdrop-blur-sm rounded-2xl p-4 border border-amber-200">
+                            <h3 className="font-semibold text-amber-900 mb-1">
+                                {images[currentSlide].title}
+                            </h3>
+                            <p className="text-sm text-amber-700">
+                                {images[currentSlide].description}
+                            </p>
+                        </div>
+
+                        <div className="flex flex-col sm:flex-row gap-4">
+                            <button
+                                onClick={handleShopNow}
+                                className="bg-gradient-to-r from-amber-500 to-orange-500 hover:from-amber-600 hover:to-orange-600 text-white px-8 py-3 rounded-full font-semibold transition-all transform hover:scale-105 shadow-lg"
+                            >
+                                Mua ngay
+                            </button>
+                            <button
+                                onClick={() => setCartOpen(true)}
+                                className="bg-white/80 backdrop-blur-sm text-amber-700 border-2 border-amber-200 hover:border-amber-300 px-8 py-3 rounded-full font-semibold transition-all transform hover:scale-105 shadow-lg hover:bg-white"
+                            >
+                                Xem giỏ hàng
+                            </button>
+                        </div>
                     </div>
 
                     {/* Carousel Container */}
