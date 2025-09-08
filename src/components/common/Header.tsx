@@ -1,8 +1,6 @@
-// src/components/common/Header.tsx - Updated
 import React from 'react';
 import { ShoppingCart, Leaf } from 'lucide-react';
-import { useCart } from '../../contexts/CartContext';
-import type { NavigationItem } from "../../types";
+import type {NavigationItem} from "../../types";
 
 interface HeaderProps {
     navigation: NavigationItem[];
@@ -11,8 +9,6 @@ interface HeaderProps {
 }
 
 export const Header: React.FC<HeaderProps> = ({ navigation, currentSection, onNavigate }) => {
-    const { toggleCart, totalItems } = useCart();
-
     return (
         <header className="bg-white/80 backdrop-blur-sm shadow-sm sticky top-0 z-50">
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -39,17 +35,8 @@ export const Header: React.FC<HeaderProps> = ({ navigation, currentSection, onNa
                         ))}
                     </nav>
 
-                    {/* Cart Button with Badge */}
-                    <button
-                        onClick={toggleCart}
-                        className="relative p-2 text-amber-600 hover:bg-amber-50 rounded-lg transition-colors"
-                    >
+                    <button className="p-2 text-amber-600 hover:bg-amber-50 rounded-lg transition-colors">
                         <ShoppingCart className="w-5 h-5" />
-                        {totalItems > 0 && (
-                            <span className="absolute -top-1 -right-1 bg-red-500 text-white text-xs font-bold rounded-full w-5 h-5 flex items-center justify-center animate-pulse">
-                                {totalItems > 99 ? '99+' : totalItems}
-                            </span>
-                        )}
                     </button>
                 </div>
             </div>
