@@ -1,11 +1,11 @@
 import React from 'react';
 import {StatCard} from "../ui/StatCard.tsx";
 
-export const OurStorySection: React.FC = () => {
+export const AboutSection: React.FC = () => {
     return (
         <section id="story" className="py-16 px-4 sm:px-6 lg:px-8 bg-white">
             <div className="max-w-7xl mx-auto">
-                <h2 className="text-3xl font-bold text-center text-amber-900 mb-12">Câu chuyện của chúng tôi</h2>
+                <h2 className="text-3xl font-bold text-center text-amber-900 mb-12">Về chúng tôi</h2>
                 <div className="grid lg:grid-cols-2 gap-12 items-center">
                     <div className="relative">
                         <div className="w-full h-96 bg-gradient-to-br from-green-200 to-blue-200 rounded-3xl shadow-xl overflow-hidden">

@@ -4,6 +4,7 @@ export interface Product {
     price: string;
     image: string;
     description: string;
+    category?: string; // Optional category
 }
 
 export interface NavigationItem {
