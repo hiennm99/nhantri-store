@@ -5,10 +5,14 @@ import tailwindcss from '@tailwindcss/vite'
 export default defineConfig({
     plugins: [
         react(),
-        tailwindcss(),
+        tailwindcss()
     ],
     build: {
-        target: 'es2020',
-        outDir: 'dist',
+        assetsInlineLimit: 4096,
+        rollupOptions: {
+            output: {
+                assetFileNames: 'images/[name]-[hash].[ext]'
+            }
+        }
     }
 })
